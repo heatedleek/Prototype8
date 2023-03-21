@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private BoxCollider2D m_GroundCheck;                           // A position marking where to check if the player is grounded.
 	[SerializeField] ParticleSystem dustParticles;
 
+	[SerializeField] Hook hook;
+
 
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
@@ -104,15 +106,23 @@ public class PlayerController : MonoBehaviour
 
 	private void Flip()
 	{
-		// Switch the way the player is labelled as facing.
-		m_FacingRight = !m_FacingRight;
+		if(!hook.hooked)
+        {
+			// Switch the way the player is labelled as facing.
+			m_FacingRight = !m_FacingRight;
 
-		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
-		dustParticles.Play();
-		AudioManager.Play(AudioClipName.Turn);
+			// Multiply the player's x local scale by -1.
+			Vector3 theScale = transform.localScale;
+			theScale.x *= -1;
+			transform.localScale = theScale;
+			dustParticles.Play();
+			AudioManager.Play(AudioClipName.Turn);
+        }
 	}
+
+	public bool GetIsGrounded()
+    {
+		return m_Grounded;
+    }
 
 }

@@ -10,11 +10,12 @@ public class Player : MonoBehaviour
     [SerializeField] float knockbackForce;
     [Range(0.0f, 1.0f)][SerializeField] float cutJumpHeight;
     [SerializeField] float smackPauseTime;
-    [SerializeField] float bulletTimeDuration = 3.0f;
-    [Range(0.0f, 1.0f)][SerializeField] float bulletTimeFactor;
+
     [Header("VFX")]
     [SerializeField] ParticleSystem deathParticles;
-    [SerializeField] Slider bulletTimeWheel;
+
+    [SerializeField] Hook hook;
+
 
     private bool isAlive = true;
 
@@ -25,8 +26,7 @@ public class Player : MonoBehaviour
     float runInput = 0.0f;
     bool jump = false;
     private float defaultTimeScale;
-    private float bulletTimer = 0.0f;
-    private bool bulletTimeActive = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,28 +36,13 @@ public class Player : MonoBehaviour
         playerController = gameObject.GetComponent<PlayerController>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         defaultTimeScale = Time.timeScale;
+        hook.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         CheckForGameplayInput();
-        if(bulletTimeActive)
-        {
-            bulletTimer -= Time.deltaTime / Time.timeScale;
-            Debug.Log(bulletTimer);
-            if (bulletTimer < 0.0f)
-            {
-                bulletTimer = 0.0f;
-                bulletTimeActive = false;
-                Time.timeScale = defaultTimeScale;
-            }
-            bulletTimeWheel.value = bulletTimer / bulletTimeDuration;
-        }
-        else
-        {
-            bulletTimeWheel.value = 0.0f;
-        }
     }
 
     private void FixedUpdate()
@@ -65,13 +50,6 @@ public class Player : MonoBehaviour
         if(isAlive)
         {
             bool hasJumped = playerController.Move(runInput * Time.fixedDeltaTime, jump);
-            if (hasJumped && !bulletTimeActive)
-            {
-                AudioManager.Play(AudioClipName.TickTock);
-                bulletTimer = bulletTimeDuration;
-                bulletTimeActive = true;
-                Time.timeScale = defaultTimeScale * bulletTimeFactor;
-            }
             jump = false;
         }
 	}
@@ -80,17 +58,18 @@ public class Player : MonoBehaviour
     {
         if (isAlive)
         {
-            runInput = Input.GetAxisRaw("Horizontal") * runSpeed;
-            if (Input.GetButtonDown("Jump"))
+            if(playerController.GetIsGrounded())
             {
                 Jump();
             }
+            runInput = Input.GetAxisRaw("Horizontal") * runSpeed;
+            if (Input.GetButtonDown("Jump"))
+            {
+                EnableHook();
+            }
             if (Input.GetButtonUp("Jump"))
             {
-                if (rb2d.velocity.y > 0)
-                {
-                    rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y * cutJumpHeight);
-                }
+                DisableHook();
             }
         }
     }
@@ -129,7 +108,6 @@ public class Player : MonoBehaviour
     public void Win()
     {
         Time.timeScale = defaultTimeScale;
-        bulletTimeWheel.gameObject.SetActive(false);
         AudioManager.Play(AudioClipName.Goal);
         Destroy(gameObject);
     }
@@ -137,6 +115,19 @@ public class Player : MonoBehaviour
     {
         jump = true;
 
+    }
+
+    public void EnableHook()
+    {
+        
+        hook.gameObject.SetActive(true);
+        hook.ResetHook();
+
+    }
+    public void DisableHook()
+    {
+        hook.Unhooken();
+        hook.gameObject.SetActive(false);
     }
 
     IEnumerator BecomeDead()

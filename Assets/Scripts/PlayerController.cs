@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
 			groundedMemory = 0;
 			jumpMemory = 0;
 			dustParticles.Play();
-			AudioManager.Play(AudioClipName.Jump);
+			//AudioManager.Play(AudioClipName.Jump);
 			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce);
 			return true;
 		}

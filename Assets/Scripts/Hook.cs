@@ -7,21 +7,19 @@ public class Hook : MonoBehaviour
     public bool hooked = false;
     Rigidbody2D rb2d;
     BoxCollider2D boxCollider;
-    HingeJoint2D hj2d;
     HingeJoint2D newHinge;
+
     Vector3 defaultRot = new Vector3( 0.0f, 0.0f, 45.0f );
     // Start is called before the first frame update
     void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
-        hj2d = GetComponent<HingeJoint2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -43,10 +41,12 @@ public class Hook : MonoBehaviour
     
     public void Hooken(Collision2D collision)
     {
+        AudioManager.Play(AudioClipName.Turn);
         newHinge = gameObject.AddComponent < HingeJoint2D>();
-       
         newHinge.anchor = transform.InverseTransformPoint(collision.GetContact(0).point);
-        //newHinge.connectedBody = collision.rigidbody;
+        newHinge.connectedBody=collision.rigidbody;
+        newHinge.connectedAnchor = transform.InverseTransformPoint(collision.GetContact(0).point);
+
         boxCollider.enabled = false;
         rb2d.constraints = RigidbodyConstraints2D.None;
         hooked = true;
@@ -55,8 +55,10 @@ public class Hook : MonoBehaviour
     {
         if(newHinge != null)
         {
+            AudioManager.Play(AudioClipName.Jump);
             hooked = false;
             Destroy(newHinge);
+            gameObject.GetComponentInParent<Rigidbody2D>().velocity *= 2f;
         }
     }
 }

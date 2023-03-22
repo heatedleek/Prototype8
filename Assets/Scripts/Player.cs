@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
         spriteRenderer.color = Color.red;
         deathParticles.Play();
         AudioManager.Play(AudioClipName.Death);
-        rb2d.freezeRotation = false;
+        rb2d.constraints = RigidbodyConstraints2D.None;
         Vector2 direction = (transform.position - killerPos).normalized;
         rb2d.AddTorque(Random.Range(-knockbackForce, knockbackForce), ForceMode2D.Impulse);
         rb2d.velocity = direction * knockbackForce;

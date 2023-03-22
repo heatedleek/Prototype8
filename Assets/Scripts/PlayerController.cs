@@ -70,8 +70,13 @@ public class PlayerController : MonoBehaviour
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
+			float clamped = move * 10f;
+			if (move != 0.0f || hook.hooked)
+			{
+				clamped = Mathf.Clamp(m_Rigidbody2D.velocity.x + move * 10f, -10.0f, 10.0f);
+            }
 			// Move the character by finding the target velocity
-			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+			Vector3 targetVelocity = new Vector2(clamped, m_Rigidbody2D.velocity.y);
 			// And then smoothing it out and applying it to the character
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 

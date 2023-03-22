@@ -66,10 +66,6 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("Level5");
         }
-        if (Input.GetKey(KeyCode.Alpha6))
-        {
-            SceneManager.LoadScene("Level6");
-        }
     }
 
     public void Lose()

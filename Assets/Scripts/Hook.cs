@@ -11,7 +11,7 @@ public class Hook : MonoBehaviour
     HingeJoint2D newHinge;
     Vector3 defaultRot = new Vector3( 0.0f, 0.0f, 45.0f );
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();

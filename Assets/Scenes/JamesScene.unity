@@ -180,17 +180,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de79d2d5cf54752438a61c2bb6ca1202, type: 3}
---- !u!114 &227854193 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8519691613915409310, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
-  m_PrefabInstance: {fileID: 1242906786}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d0b4e82c4c0a59479d8e29fbbb309ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &275855840
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,45 +409,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 159490567606830445, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
-      propertyPath: hook
-      value: 
-      objectReference: {fileID: 227854193}
-    - target: {fileID: 159490567606830445, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
-      propertyPath: m_JumpForce
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 159490567606830445, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
-      propertyPath: m_AirControl
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 159490567606830445, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
-      propertyPath: m_MovementSmoothing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 731301998651958380, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
-      propertyPath: m_Simulated
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 731301998651958380, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 731301998651958380, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2024047408484779453, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
       propertyPath: m_Name
       value: Character
-      objectReference: {fileID: 0}
-    - target: {fileID: 2209558771419915919, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2209558771419915919, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3248279653388157487, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
       propertyPath: m_RootOrder
@@ -503,10 +456,6 @@ PrefabInstance:
     - target: {fileID: 3248279653388157487, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4168756178325517605, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
-      propertyPath: m_GravityScale
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c88339fe0db728a43b15ac21b156a967, type: 3}
